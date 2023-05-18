@@ -41,18 +41,17 @@ Use the `genTable` function to create a table of data at a given summary level. 
 For more on the data available, see the [table reference](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=139) or [full list of variables](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=183).
 
 **Argument list**
-**dir** directory where your summary files are stored
-**geoheader** dataframe containing your geoheader
-**table_id** table number containing the data you want, according to the data dictionary *(eg P1 or P001)*
-**level** summary level code *DEFAULT: 040*
- - **040** state 
- - **050** county    
- - **160** place   
- - **140** tract    
- - **150** block group
- - **101** block
-
-**geo_comp** - [geographic component](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=177) available on the state level *DEFAULT: 00*
+ - **dir** directory where your summary files are stored
+ - **geoheader** dataframe containing your geoheader
+ - **table_id** table number containing the data you want, according to the data dictionary *(eg P1 or P001)*
+ - **level** summary level code *DEFAULT: 040*
+    - **040** state 
+    - **050** county    
+    - **160** place   
+    - **140** tract    
+    - **150** block group
+    - **101** block
+ - **geo_comp** - [geographic component](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=177) available on the state level *DEFAULT: 00*
 
 
 ```R
