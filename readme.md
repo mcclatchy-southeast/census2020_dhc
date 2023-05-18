@@ -33,7 +33,16 @@ The summary file is split into a header file and dozens of other tables. These s
 
 ```R
 #load the header file
-geo_header_nc2010 <- load_header2010( '{{PATH}}/nc2010.sf1/ncgeo2010.sf1')
+geo_header_nc2010 <- loadHeader2010( '{{PATH}}/nc2010.sf1/ncgeo2010.sf1')
+```
+
+Load the field list with the `genFieldList` function, which generates a list of every field in every table in the summary file based on the [census data dictionary](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=183).
+
+The function optionally accepts a two-digit state code parameter. The default is `nc`.
+
+```R
+#load the field list
+field_list <- genFieldList()
 ```
 
 Use the `genTable` function to create a table of data at a given summary level. The `table_id` argument specifies which data you want based on the census table number (e.g. `P3` is the race population table). The default summary level is statewide, but you can specify county, place, tract, block group, or block for now. Replace `{{PATH}}` with the directory where you stored the unzipped file.
@@ -51,7 +60,8 @@ For more on the data available, see the [table reference](https://www2.census.go
     - **140** tract    
     - **150** block group
     - **101** block
- - **geo_comp** - [geographic component](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=177) available on the state level *DEFAULT: 00*
+ - **geo_comp** [geographic component](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=177) available on the state level *DEFAULT: 00*
+ - **fields** dataframe containing the field list and table filenames customized for a given state. Unless you rename your field_list variable generated earlier, you shouldn't have to change this. **DEFAULT: field_list**
 
 
 ```R

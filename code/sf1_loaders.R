@@ -11,6 +11,7 @@ packages <- c('tidyverse')
 if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
   install.packages(setdiff(packages, rownames(installed.packages())), repos = "https://cran.us.r-project.org")  
 }
+rm(packages)
 
 #load libraries
 library(tidyverse)
@@ -25,8 +26,8 @@ library(tidyverse)
 # https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=163
 #
 # usage
-# geo_header_nc2010 <- load_header2010( 'data/nc2010.sf1/ncgeo2010.sf1')
-load_header2010 <- function(path){
+# geo_header_nc2010 <- loadHeader2010( 'data/nc2010.sf1/ncgeo2010.sf1')
+loadHeader2010 <- function(path){
   header <- readr::read_fwf(
     path, col_types = cols(.default = "c"),
     progress = show_progress(), trim_ws = TRUE,
@@ -139,591 +140,603 @@ load_header2010 <- function(path){
 
 # Load variables for the 2010 summary file --------------------------------
 
+
+# Function to generate field names ----------------------------------------
+
 # load the field list into a dataframe based on the data dictionary
 # https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=183
-field_list <- tibble(
-  file = 'base',
-  no = 0,
-  col_name = c('fileid', 'stusab', 'chariter', 'cifsn', 'logrecno')
+# accepts a two-digit state code as a parameter, although default is nc
+#
+# usage
+# field_list <- genFieldList('nc')
+
+genFieldList <- function(state_code = 'nc'){
+  field_list <- tibble(
+    file = 'base',
+    no = 0,
+    col_name = c('fileid', 'stusab', 'chariter', 'cifsn', 'logrecno')
   ) %>% 
-  rbind(
-    tibble(
-      file = 'nc000012010.sf1', 
-      no = 01, 
-      col_name = 'P0010001'
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000022010.sf1',
-      no = 02, 
-      col_name =c(paste0('P', sprintf('%0.3d', 2), sprintf('%0.4d', 1:6)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000032010.sf1',
-      no = 03, 
-      col_name =c(paste0('P', sprintf('%0.3d', 3), sprintf('%0.4d', 1:8)),
-                  paste0('P', sprintf('%0.3d', 4), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 5), sprintf('%0.4d', 1:17)),
-                  paste0('P', sprintf('%0.3d', 6), sprintf('%0.4d', 1:7)),
-                  paste0('P', sprintf('%0.3d', 7), sprintf('%0.4d', 1:15)),
-                  paste0('P', sprintf('%0.3d', 8), sprintf('%0.4d', 1:71)),
-                  paste0('P', sprintf('%0.3d', 9), sprintf('%0.4d', 1:73)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000042010.sf1',
-      no = 04, 
-      col_name =c(paste0('P', sprintf('%0.3d', 10), sprintf('%0.4d', 1:71)),
-                  paste0('P', sprintf('%0.3d', 11), sprintf('%0.4d', 1:73)),
-                  paste0('P', sprintf('%0.3d', 12), sprintf('%0.4d', 1:49)),
-                  paste0('P', sprintf('%0.3d', 13), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 14), sprintf('%0.4d', 1:43)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000052010.sf1',
-      no = 05, 
-      col_name =c(paste0('P', sprintf('%0.3d', 15), sprintf('%0.4d', 1:17)),
-                  paste0('P', sprintf('%0.3d', 16), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 17), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 18), sprintf('%0.4d', 1:9)),
-                  paste0('P', sprintf('%0.3d', 19), sprintf('%0.4d', 1:19)),
-                  paste0('P', sprintf('%0.3d', 20), sprintf('%0.4d', 1:34)),
-                  paste0('P', sprintf('%0.3d', 21), sprintf('%0.4d', 1:31)),
-                  paste0('P', sprintf('%0.3d', 22), sprintf('%0.4d', 1:21)),
-                  paste0('P', sprintf('%0.3d', 23), sprintf('%0.4d', 1:15)),
-                  paste0('P', sprintf('%0.3d', 24), sprintf('%0.4d', 1:11)),
-                  paste0('P', sprintf('%0.3d', 25), sprintf('%0.4d', 1:11)),
-                  paste0('P', sprintf('%0.3d', 26), sprintf('%0.4d', 1:11)),
-                  paste0('P', sprintf('%0.3d', 27), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 28), sprintf('%0.4d', 1:16)),
-                  paste0('P', sprintf('%0.3d', 29), sprintf('%0.4d', 1:28)),
-                  paste0('P', sprintf('%0.3d', 30), sprintf('%0.4d', 1:13)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000062010.sf1',
-      no = 06, 
-      col_name =c(paste0('P', sprintf('%0.3d', 31), sprintf('%0.4d', 1:16)),
-                  paste0('P', sprintf('%0.3d', 32), sprintf('%0.4d', 1:45)),
-                  paste0('P', sprintf('%0.3d', 33), sprintf('%0.4d', 1:7)),
-                  paste0('P', sprintf('%0.3d', 34), sprintf('%0.4d', 1:22)),
-                  paste0('P', sprintf('%0.3d', 35), sprintf('%0.4d', 1)),
-                  paste0('P', sprintf('%0.3d', 36), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 37), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 38), sprintf('%0.4d', 1:20)),
-                  paste0('P', sprintf('%0.3d', 39), sprintf('%0.4d', 1:20)),
-                  paste0('P', sprintf('%0.3d', 40), sprintf('%0.4d', 1:20)),
-                  paste0('P', sprintf('%0.3d', 41), sprintf('%0.4d', 1:6)),
-                  paste0('P', sprintf('%0.3d', 42), sprintf('%0.4d', 1:10)),
-                  paste0('P', sprintf('%0.3d', 43), sprintf('%0.4d', 1:63)),
-                  paste0('P', sprintf('%0.3d', 44), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 45), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 46), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 47), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 48), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 49), sprintf('%0.4d', 1:3)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000072010.sf1',
-      no = 07, 
-      col_name =c(paste0('P', sprintf('%0.3d', 50), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 51), sprintf('%0.4d', 1:3)),
-                  paste0('P', sprintf('%0.3d', 12),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:49, letters = LETTERS[1:5])$letters,
-                                 expand.grid(numbers = 1:49, letters = LETTERS[1:5])$numbers
-                         )
-                  ))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000082010.sf1',
-      no = 08, 
-      col_name =c(paste0('P', sprintf('%0.3d', 12),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:49, letters = LETTERS[6:9])$letters,
-                                 expand.grid(numbers = 1:49, letters = LETTERS[6:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 13),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 16),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 17), 'A', sprintf('%0.3d', 1:3)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000092010.sf1',
-      no = 09, 
-      col_name =c(paste0('P', sprintf('%0.3d', 17),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:3, letters = LETTERS[2:9])$letters,
-                                 expand.grid(numbers = 1:3, letters = LETTERS[2:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 18),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:9, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:9, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 28),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:16, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:16, letters = LETTERS[1:9])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000102010.sf1',
-      no = 10, 
-      col_name =c(paste0('P', sprintf('%0.3d', 29),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:28, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:28, letters = LETTERS[1:9])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000112010.sf1',
-      no = 11, 
-      col_name =c(paste0('P', sprintf('%0.3d', 31),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:16, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:16, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 34),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:22, letters = LETTERS[1:5])$letters,
-                                 expand.grid(numbers = 1:22, letters = LETTERS[1:5])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000122010.sf1',
-      no = 12, 
-      col_name =c(paste0('P', sprintf('%0.3d', 34),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:22, letters = LETTERS[6:9])$letters,
-                                 expand.grid(numbers = 1:22, letters = LETTERS[6:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 35),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 36),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 37),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 38),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:20, letters = LETTERS[1:5])$letters,
-                                 expand.grid(numbers = 1:20, letters = LETTERS[1:5])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000132010.sf1',
-      no = 13, 
-      col_name =c(paste0('P', sprintf('%0.3d', 38),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:20, letters = LETTERS[6:9])$letters,
-                                 expand.grid(numbers = 1:20, letters = LETTERS[6:9])$numbers
-                         )),
-                  paste0('P', sprintf('%0.3d', 39),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:20, letters = LETTERS[1:8])$letters,
-                                 expand.grid(numbers = 1:20, letters = LETTERS[1:8])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000142010.sf1',
-      no = 14, 
-      col_name =c(paste0('P', sprintf('%0.3d', 39),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:20, letters = LETTERS[9])$letters,
-                                 expand.grid(numbers = 1:20, letters = LETTERS[9])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000152010.sf1',
-      no = 15, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 1), sprintf('%0.4d', 1:54)),
-                  paste0('PCT', sprintf('%0.3d', 2), sprintf('%0.4d', 1:54)),
-                  paste0('PCT', sprintf('%0.3d', 3), sprintf('%0.4d', 1:54)),
-                  paste0('PCT', sprintf('%0.3d', 4), sprintf('%0.4d', 1:9)),
-                  paste0('PCT', sprintf('%0.3d', 5), sprintf('%0.4d', 1:22)),
-                  paste0('PCT', sprintf('%0.3d', 6), sprintf('%0.4d', 1:22)),
-                  paste0('PCT', sprintf('%0.3d', 7), sprintf('%0.4d', 1:22)),
-                  paste0('PCT', sprintf('%0.3d', 8), sprintf('%0.4d', 1:14)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000162010.sf1',
-      no = 16, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 9), sprintf('%0.4d', 1:14)),
-                  paste0('PCT', sprintf('%0.3d', 10), sprintf('%0.4d', 1:14)),
-                  paste0('PCT', sprintf('%0.3d', 11), sprintf('%0.4d', 1:31)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000172010.sf1',
-      no = 17, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), sprintf('%0.4d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000182010.sf1',
-      no = 18, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 13), sprintf('%0.4d', 1:49)),
-                  paste0('PCT', sprintf('%0.3d', 14), sprintf('%0.4d', 1:3)),
-                  paste0('PCT', sprintf('%0.3d', 15), sprintf('%0.4d', 1:34)),
-                  paste0('PCT', sprintf('%0.3d', 16), sprintf('%0.4d', 1:26)),
-                  paste0('PCT', sprintf('%0.3d', 17), sprintf('%0.4d', 1:18)),
-                  paste0('PCT', sprintf('%0.3d', 18), sprintf('%0.4d', 1:15)),
-                  paste0('PCT', sprintf('%0.3d', 19), sprintf('%0.4d', 1:11)),
-                  paste0('PCT', sprintf('%0.3d', 20), sprintf('%0.4d', 1:32)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000192010.sf1',
-      no = 19, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 21), sprintf('%0.4d', 1:195)),
-                  paste0('PCT', sprintf('%0.3d', 22), sprintf('%0.4d', 1:21)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000202010.sf1',
-      no = 20, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'A', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000212010.sf1',
-      no = 21, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'B', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000222010.sf1',
-      no = 22, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'C', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000232010.sf1',
-      no = 23, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'D', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file ='nc000242010.sf1',
-      no = 24, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'E', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000252010.sf1',
-      no = 25, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'F', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000262010.sf1',
-      no = 26, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'G', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000272010.sf1',
-      no = 27, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'H', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000282010.sf1',
-      no = 28, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'I', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000292010.sf1',
-      no = 29, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'J', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000302010.sf1',
-      no = 30, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'K', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000312010.sf1',
-      no = 31, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'L', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000322010.sf1',
-      no = 32, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'M', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000332010.sf1',
-      no = 33, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'N', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000342010.sf1',
-      no = 34, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'O', sprintf('%0.3d', 1:209)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000352010.sf1',
-      no = 35, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 13),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:49, letters = LETTERS[1:5])$letters,
-                                 expand.grid(numbers = 1:49, letters = LETTERS[1:5])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000362010.sf1',
-      no = 36, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 13),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:49, letters = LETTERS[6:9])$letters,
-                                 expand.grid(numbers = 1:49, letters = LETTERS[6:9])$numbers
-                         )),
-                  paste0('PCT', sprintf('%0.3d', 14),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('PCT', sprintf('%0.3d', 19),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:11, letters = LETTERS[1:2])$letters,
-                                 expand.grid(numbers = 1:11, letters = LETTERS[1:2])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000372010.sf1',
-      no = 37, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 19),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:11, letters = LETTERS[3:9])$letters,
-                                 expand.grid(numbers = 1:11, letters = LETTERS[3:9])$numbers
-                         )),
-                  paste0('PCT', sprintf('%0.3d', 20),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:32, letters = LETTERS[1:5])$letters,
-                                 expand.grid(numbers = 1:32, letters = LETTERS[1:5])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000382010.sf1',
-      no = 38, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 20),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:32, letters = LETTERS[6:9])$letters,
-                                 expand.grid(numbers = 1:32, letters = LETTERS[6:9])$numbers
-                         )),
-                  paste0('PCT', sprintf('%0.3d', 22),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:21, letters = LETTERS[1:6])$letters,
-                                 expand.grid(numbers = 1:21, letters = LETTERS[1:6])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000392010.sf1',
-      no = 39, 
-      col_name =c(paste0('PCT', sprintf('%0.3d', 22),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:21, letters = LETTERS[7:9])$letters,
-                                 expand.grid(numbers = 1:21, letters = LETTERS[7:9])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000402010.sf1',
-      no = 40, 
-      col_name =c(paste0('PCO', sprintf('%0.3d', 1), sprintf('%0.4d', 1:39)),
-                  paste0('PCO', sprintf('%0.3d', 2), sprintf('%0.4d', 1:39)),
-                  paste0('PCO', sprintf('%0.3d', 3), sprintf('%0.4d', 1:39)),
-                  paste0('PCO', sprintf('%0.3d', 4), sprintf('%0.4d', 1:39)),
-                  paste0('PCO', sprintf('%0.3d', 5), sprintf('%0.4d', 1:39)),
-                  paste0('PCO', sprintf('%0.3d', 6), sprintf('%0.4d', 1:39)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000412010.sf1',
-      no = 41, 
-      col_name =c(paste0('PCO', sprintf('%0.3d', 7), sprintf('%0.4d', 1:39)),
-                  paste0('PCO', sprintf('%0.3d', 8), sprintf('%0.4d', 1:39)),
-                  paste0('PCO', sprintf('%0.3d', 9), sprintf('%0.4d', 1:39)),
-                  paste0('PCO', sprintf('%0.3d', 10), sprintf('%0.4d', 1:39)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000422010.sf1',
-      no = 42, 
-      col_name =c('H00010001')
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000432010.sf1',
-      no = 43, 
-      col_name =c(paste0('H', sprintf('%0.3d', 2), sprintf('%0.4d', 1:6)))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000442010.sf1',
-      no = 44, 
-      col_name =c(paste0('H', sprintf('%0.3d', 3), sprintf('%0.4d', 1:3)),
-                  paste0('H', sprintf('%0.3d', 4), sprintf('%0.4d', 1:4)),
-                  paste0('H', sprintf('%0.3d', 5), sprintf('%0.4d', 1:8)),
-                  paste0('H', sprintf('%0.3d', 6), sprintf('%0.4d', 1:8)),
-                  paste0('H', sprintf('%0.3d', 7), sprintf('%0.4d', 1:17)),
-                  paste0('H', sprintf('%0.3d', 8), sprintf('%0.4d', 1:7)),
-                  paste0('H', sprintf('%0.3d', 9), sprintf('%0.4d', 1:15)),
-                  paste0('H', sprintf('%0.3d', 10), sprintf('%0.4d', 1)),
-                  paste0('H', sprintf('%0.3d', 11), sprintf('%0.4d', 1:4)),
-                  paste0('H', sprintf('%0.3d', 12), sprintf('%0.4d', 1:3)),
-                  paste0('H', sprintf('%0.3d', 13), sprintf('%0.4d', 1:8)),
-                  paste0('H', sprintf('%0.3d', 14), sprintf('%0.4d', 1:17)),
-                  paste0('H', sprintf('%0.3d', 15), sprintf('%0.4d', 1:7)),
-                  paste0('H', sprintf('%0.3d', 16), sprintf('%0.4d', 1:16)),
-                  paste0('H', sprintf('%0.3d', 17), sprintf('%0.4d', 1:21)),
-                  paste0('H', sprintf('%0.3d', 18), sprintf('%0.4d', 1:69)),
-                  paste0('H', sprintf('%0.3d', 19), sprintf('%0.4d', 1:7)),
-                  paste0('H', sprintf('%0.3d', 20), sprintf('%0.4d', 1:3)),
-                  paste0('H', sprintf('%0.3d', 21), sprintf('%0.4d', 1:3)),
-                  paste0('H', sprintf('%0.3d', 22), sprintf('%0.4d', 1:3)),
-                  paste0('H', sprintf('%0.3d', 11),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:4, letters = LETTERS[1:6])$letters,
-                                 expand.grid(numbers = 1:4, letters = LETTERS[1:6])$numbers
-                         )
-                  )
+    rbind(
+      tibble(
+        file = paste0(state_code, '000012010.sf1'), 
+        no = 01, 
+        col_name = 'P0010001'
       )
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000452010.sf1',
-      no = 45, 
-      col_name =c(paste0('H', sprintf('%0.3d', 11),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:4, letters = LETTERS[7:9])$letters,
-                                 expand.grid(numbers = 1:4, letters = LETTERS[7:9])$numbers
-                         )),
-                  paste0('H', sprintf('%0.3d', 12),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('H', sprintf('%0.3d', 16),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:17, letters = LETTERS[1:9])$letters,
-                                 expand.grid(numbers = 1:17, letters = LETTERS[1:9])$numbers
-                         )),
-                  paste0('H', sprintf('%0.3d', 17),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:21, letters = LETTERS[1:3])$letters,
-                                 expand.grid(numbers = 1:21, letters = LETTERS[1:3])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000462010.sf1',
-      no = 46, 
-      col_name =c(paste0('H', sprintf('%0.3d', 17),
-                         sprintf('%s%0.3d',
-                                 expand.grid(numbers = 1:21, letters = LETTERS[4:9])$letters,
-                                 expand.grid(numbers = 1:21, letters = LETTERS[4:9])$numbers
-                         )))
-    )
-  ) %>%
-  rbind(
-    tibble(
-      file = 'nc000472010.sf1',
-      no = 47, 
-      col_name =c(paste0('HCT', sprintf('%0.3d', 1), sprintf('%0.4d', 1:35)),
-                  paste0('HCT', sprintf('%0.3d', 2), sprintf('%0.4d', 1:13)),
-                  paste0('HCT', sprintf('%0.3d', 3), sprintf('%0.4d', 1:13)),
-                  paste0('HCT', sprintf('%0.3d', 4), sprintf('%0.4d', 1:13)),
-                  paste0('PCT', sprintf('%0.3d', 23), sprintf('%0.4d', 1:24)),
-                  paste0('PCT', sprintf('%0.3d', 24), sprintf('%0.4d', 1:23)))
-    )
-  ) %>% 
-  mutate(table_no = str_extract(col_name, '^[A-Z]+\\d{3}[A-Z]?'), .after = no)
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000022010.sf1'),
+        no = 02, 
+        col_name =c(paste0('P', sprintf('%0.3d', 2), sprintf('%0.4d', 1:6)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000032010.sf1'),
+        no = 03, 
+        col_name =c(paste0('P', sprintf('%0.3d', 3), sprintf('%0.4d', 1:8)),
+                    paste0('P', sprintf('%0.3d', 4), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 5), sprintf('%0.4d', 1:17)),
+                    paste0('P', sprintf('%0.3d', 6), sprintf('%0.4d', 1:7)),
+                    paste0('P', sprintf('%0.3d', 7), sprintf('%0.4d', 1:15)),
+                    paste0('P', sprintf('%0.3d', 8), sprintf('%0.4d', 1:71)),
+                    paste0('P', sprintf('%0.3d', 9), sprintf('%0.4d', 1:73)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000042010.sf1'),
+        no = 04, 
+        col_name =c(paste0('P', sprintf('%0.3d', 10), sprintf('%0.4d', 1:71)),
+                    paste0('P', sprintf('%0.3d', 11), sprintf('%0.4d', 1:73)),
+                    paste0('P', sprintf('%0.3d', 12), sprintf('%0.4d', 1:49)),
+                    paste0('P', sprintf('%0.3d', 13), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 14), sprintf('%0.4d', 1:43)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000052010.sf1'),
+        no = 05, 
+        col_name =c(paste0('P', sprintf('%0.3d', 15), sprintf('%0.4d', 1:17)),
+                    paste0('P', sprintf('%0.3d', 16), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 17), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 18), sprintf('%0.4d', 1:9)),
+                    paste0('P', sprintf('%0.3d', 19), sprintf('%0.4d', 1:19)),
+                    paste0('P', sprintf('%0.3d', 20), sprintf('%0.4d', 1:34)),
+                    paste0('P', sprintf('%0.3d', 21), sprintf('%0.4d', 1:31)),
+                    paste0('P', sprintf('%0.3d', 22), sprintf('%0.4d', 1:21)),
+                    paste0('P', sprintf('%0.3d', 23), sprintf('%0.4d', 1:15)),
+                    paste0('P', sprintf('%0.3d', 24), sprintf('%0.4d', 1:11)),
+                    paste0('P', sprintf('%0.3d', 25), sprintf('%0.4d', 1:11)),
+                    paste0('P', sprintf('%0.3d', 26), sprintf('%0.4d', 1:11)),
+                    paste0('P', sprintf('%0.3d', 27), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 28), sprintf('%0.4d', 1:16)),
+                    paste0('P', sprintf('%0.3d', 29), sprintf('%0.4d', 1:28)),
+                    paste0('P', sprintf('%0.3d', 30), sprintf('%0.4d', 1:13)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000062010.sf1'),
+        no = 06, 
+        col_name =c(paste0('P', sprintf('%0.3d', 31), sprintf('%0.4d', 1:16)),
+                    paste0('P', sprintf('%0.3d', 32), sprintf('%0.4d', 1:45)),
+                    paste0('P', sprintf('%0.3d', 33), sprintf('%0.4d', 1:7)),
+                    paste0('P', sprintf('%0.3d', 34), sprintf('%0.4d', 1:22)),
+                    paste0('P', sprintf('%0.3d', 35), sprintf('%0.4d', 1)),
+                    paste0('P', sprintf('%0.3d', 36), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 37), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 38), sprintf('%0.4d', 1:20)),
+                    paste0('P', sprintf('%0.3d', 39), sprintf('%0.4d', 1:20)),
+                    paste0('P', sprintf('%0.3d', 40), sprintf('%0.4d', 1:20)),
+                    paste0('P', sprintf('%0.3d', 41), sprintf('%0.4d', 1:6)),
+                    paste0('P', sprintf('%0.3d', 42), sprintf('%0.4d', 1:10)),
+                    paste0('P', sprintf('%0.3d', 43), sprintf('%0.4d', 1:63)),
+                    paste0('P', sprintf('%0.3d', 44), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 45), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 46), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 47), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 48), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 49), sprintf('%0.4d', 1:3)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000072010.sf1'),
+        no = 07, 
+        col_name =c(paste0('P', sprintf('%0.3d', 50), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 51), sprintf('%0.4d', 1:3)),
+                    paste0('P', sprintf('%0.3d', 12),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:49, letters = LETTERS[1:5])$letters,
+                                   expand.grid(numbers = 1:49, letters = LETTERS[1:5])$numbers
+                           )
+                    ))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000082010.sf1'),
+        no = 08, 
+        col_name =c(paste0('P', sprintf('%0.3d', 12),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:49, letters = LETTERS[6:9])$letters,
+                                   expand.grid(numbers = 1:49, letters = LETTERS[6:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 13),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 16),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 17), 'A', sprintf('%0.3d', 1:3)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000092010.sf1'),
+        no = 09, 
+        col_name =c(paste0('P', sprintf('%0.3d', 17),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:3, letters = LETTERS[2:9])$letters,
+                                   expand.grid(numbers = 1:3, letters = LETTERS[2:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 18),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:9, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:9, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 28),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:16, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:16, letters = LETTERS[1:9])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000102010.sf1'),
+        no = 10, 
+        col_name =c(paste0('P', sprintf('%0.3d', 29),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:28, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:28, letters = LETTERS[1:9])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000112010.sf1'),
+        no = 11, 
+        col_name =c(paste0('P', sprintf('%0.3d', 31),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:16, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:16, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 34),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:22, letters = LETTERS[1:5])$letters,
+                                   expand.grid(numbers = 1:22, letters = LETTERS[1:5])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000122010.sf1'),
+        no = 12, 
+        col_name =c(paste0('P', sprintf('%0.3d', 34),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:22, letters = LETTERS[6:9])$letters,
+                                   expand.grid(numbers = 1:22, letters = LETTERS[6:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 35),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 36),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 37),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 38),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:20, letters = LETTERS[1:5])$letters,
+                                   expand.grid(numbers = 1:20, letters = LETTERS[1:5])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000132010.sf1'),
+        no = 13, 
+        col_name =c(paste0('P', sprintf('%0.3d', 38),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:20, letters = LETTERS[6:9])$letters,
+                                   expand.grid(numbers = 1:20, letters = LETTERS[6:9])$numbers
+                           )),
+                    paste0('P', sprintf('%0.3d', 39),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:20, letters = LETTERS[1:8])$letters,
+                                   expand.grid(numbers = 1:20, letters = LETTERS[1:8])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000142010.sf1'),
+        no = 14, 
+        col_name =c(paste0('P', sprintf('%0.3d', 39),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:20, letters = LETTERS[9])$letters,
+                                   expand.grid(numbers = 1:20, letters = LETTERS[9])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000152010.sf1'),
+        no = 15, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 1), sprintf('%0.4d', 1:54)),
+                    paste0('PCT', sprintf('%0.3d', 2), sprintf('%0.4d', 1:54)),
+                    paste0('PCT', sprintf('%0.3d', 3), sprintf('%0.4d', 1:54)),
+                    paste0('PCT', sprintf('%0.3d', 4), sprintf('%0.4d', 1:9)),
+                    paste0('PCT', sprintf('%0.3d', 5), sprintf('%0.4d', 1:22)),
+                    paste0('PCT', sprintf('%0.3d', 6), sprintf('%0.4d', 1:22)),
+                    paste0('PCT', sprintf('%0.3d', 7), sprintf('%0.4d', 1:22)),
+                    paste0('PCT', sprintf('%0.3d', 8), sprintf('%0.4d', 1:14)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000162010.sf1'),
+        no = 16, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 9), sprintf('%0.4d', 1:14)),
+                    paste0('PCT', sprintf('%0.3d', 10), sprintf('%0.4d', 1:14)),
+                    paste0('PCT', sprintf('%0.3d', 11), sprintf('%0.4d', 1:31)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000172010.sf1'),
+        no = 17, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), sprintf('%0.4d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000182010.sf1'),
+        no = 18, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 13), sprintf('%0.4d', 1:49)),
+                    paste0('PCT', sprintf('%0.3d', 14), sprintf('%0.4d', 1:3)),
+                    paste0('PCT', sprintf('%0.3d', 15), sprintf('%0.4d', 1:34)),
+                    paste0('PCT', sprintf('%0.3d', 16), sprintf('%0.4d', 1:26)),
+                    paste0('PCT', sprintf('%0.3d', 17), sprintf('%0.4d', 1:18)),
+                    paste0('PCT', sprintf('%0.3d', 18), sprintf('%0.4d', 1:15)),
+                    paste0('PCT', sprintf('%0.3d', 19), sprintf('%0.4d', 1:11)),
+                    paste0('PCT', sprintf('%0.3d', 20), sprintf('%0.4d', 1:32)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000192010.sf1'),
+        no = 19, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 21), sprintf('%0.4d', 1:195)),
+                    paste0('PCT', sprintf('%0.3d', 22), sprintf('%0.4d', 1:21)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000202010.sf1'),
+        no = 20, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'A', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000212010.sf1'),
+        no = 21, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'B', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000222010.sf1'),
+        no = 22, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'C', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000232010.sf1'),
+        no = 23, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'D', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000242010.sf1'),
+        no = 24, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'E', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000252010.sf1'),
+        no = 25, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'F', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000262010.sf1'),
+        no = 26, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'G', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000272010.sf1'),
+        no = 27, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'H', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000282010.sf1'),
+        no = 28, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'I', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000292010.sf1'),
+        no = 29, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'J', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000302010.sf1'),
+        no = 30, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'K', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000312010.sf1'),
+        no = 31, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'L', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000322010.sf1'),
+        no = 32, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'M', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000332010.sf1'),
+        no = 33, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'N', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000342010.sf1'),
+        no = 34, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'O', sprintf('%0.3d', 1:209)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000352010.sf1'),
+        no = 35, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 13),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:49, letters = LETTERS[1:5])$letters,
+                                   expand.grid(numbers = 1:49, letters = LETTERS[1:5])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000362010.sf1'),
+        no = 36, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 13),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:49, letters = LETTERS[6:9])$letters,
+                                   expand.grid(numbers = 1:49, letters = LETTERS[6:9])$numbers
+                           )),
+                    paste0('PCT', sprintf('%0.3d', 14),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('PCT', sprintf('%0.3d', 19),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:11, letters = LETTERS[1:2])$letters,
+                                   expand.grid(numbers = 1:11, letters = LETTERS[1:2])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000372010.sf1'),
+        no = 37, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 19),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:11, letters = LETTERS[3:9])$letters,
+                                   expand.grid(numbers = 1:11, letters = LETTERS[3:9])$numbers
+                           )),
+                    paste0('PCT', sprintf('%0.3d', 20),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:32, letters = LETTERS[1:5])$letters,
+                                   expand.grid(numbers = 1:32, letters = LETTERS[1:5])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000382010.sf1'),
+        no = 38, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 20),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:32, letters = LETTERS[6:9])$letters,
+                                   expand.grid(numbers = 1:32, letters = LETTERS[6:9])$numbers
+                           )),
+                    paste0('PCT', sprintf('%0.3d', 22),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:21, letters = LETTERS[1:6])$letters,
+                                   expand.grid(numbers = 1:21, letters = LETTERS[1:6])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000392010.sf1'),
+        no = 39, 
+        col_name =c(paste0('PCT', sprintf('%0.3d', 22),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:21, letters = LETTERS[7:9])$letters,
+                                   expand.grid(numbers = 1:21, letters = LETTERS[7:9])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000402010.sf1'),
+        no = 40, 
+        col_name =c(paste0('PCO', sprintf('%0.3d', 1), sprintf('%0.4d', 1:39)),
+                    paste0('PCO', sprintf('%0.3d', 2), sprintf('%0.4d', 1:39)),
+                    paste0('PCO', sprintf('%0.3d', 3), sprintf('%0.4d', 1:39)),
+                    paste0('PCO', sprintf('%0.3d', 4), sprintf('%0.4d', 1:39)),
+                    paste0('PCO', sprintf('%0.3d', 5), sprintf('%0.4d', 1:39)),
+                    paste0('PCO', sprintf('%0.3d', 6), sprintf('%0.4d', 1:39)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000412010.sf1'),
+        no = 41, 
+        col_name =c(paste0('PCO', sprintf('%0.3d', 7), sprintf('%0.4d', 1:39)),
+                    paste0('PCO', sprintf('%0.3d', 8), sprintf('%0.4d', 1:39)),
+                    paste0('PCO', sprintf('%0.3d', 9), sprintf('%0.4d', 1:39)),
+                    paste0('PCO', sprintf('%0.3d', 10), sprintf('%0.4d', 1:39)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000422010.sf1'),
+        no = 42, 
+        col_name =c('H00010001')
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000432010.sf1'),
+        no = 43, 
+        col_name =c(paste0('H', sprintf('%0.3d', 2), sprintf('%0.4d', 1:6)))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000442010.sf1'),
+        no = 44, 
+        col_name =c(paste0('H', sprintf('%0.3d', 3), sprintf('%0.4d', 1:3)),
+                    paste0('H', sprintf('%0.3d', 4), sprintf('%0.4d', 1:4)),
+                    paste0('H', sprintf('%0.3d', 5), sprintf('%0.4d', 1:8)),
+                    paste0('H', sprintf('%0.3d', 6), sprintf('%0.4d', 1:8)),
+                    paste0('H', sprintf('%0.3d', 7), sprintf('%0.4d', 1:17)),
+                    paste0('H', sprintf('%0.3d', 8), sprintf('%0.4d', 1:7)),
+                    paste0('H', sprintf('%0.3d', 9), sprintf('%0.4d', 1:15)),
+                    paste0('H', sprintf('%0.3d', 10), sprintf('%0.4d', 1)),
+                    paste0('H', sprintf('%0.3d', 11), sprintf('%0.4d', 1:4)),
+                    paste0('H', sprintf('%0.3d', 12), sprintf('%0.4d', 1:3)),
+                    paste0('H', sprintf('%0.3d', 13), sprintf('%0.4d', 1:8)),
+                    paste0('H', sprintf('%0.3d', 14), sprintf('%0.4d', 1:17)),
+                    paste0('H', sprintf('%0.3d', 15), sprintf('%0.4d', 1:7)),
+                    paste0('H', sprintf('%0.3d', 16), sprintf('%0.4d', 1:16)),
+                    paste0('H', sprintf('%0.3d', 17), sprintf('%0.4d', 1:21)),
+                    paste0('H', sprintf('%0.3d', 18), sprintf('%0.4d', 1:69)),
+                    paste0('H', sprintf('%0.3d', 19), sprintf('%0.4d', 1:7)),
+                    paste0('H', sprintf('%0.3d', 20), sprintf('%0.4d', 1:3)),
+                    paste0('H', sprintf('%0.3d', 21), sprintf('%0.4d', 1:3)),
+                    paste0('H', sprintf('%0.3d', 22), sprintf('%0.4d', 1:3)),
+                    paste0('H', sprintf('%0.3d', 11),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:4, letters = LETTERS[1:6])$letters,
+                                   expand.grid(numbers = 1:4, letters = LETTERS[1:6])$numbers
+                           )
+                    )
+        )
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000452010.sf1'),
+        no = 45, 
+        col_name =c(paste0('H', sprintf('%0.3d', 11),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:4, letters = LETTERS[7:9])$letters,
+                                   expand.grid(numbers = 1:4, letters = LETTERS[7:9])$numbers
+                           )),
+                    paste0('H', sprintf('%0.3d', 12),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('H', sprintf('%0.3d', 16),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:17, letters = LETTERS[1:9])$letters,
+                                   expand.grid(numbers = 1:17, letters = LETTERS[1:9])$numbers
+                           )),
+                    paste0('H', sprintf('%0.3d', 17),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:21, letters = LETTERS[1:3])$letters,
+                                   expand.grid(numbers = 1:21, letters = LETTERS[1:3])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000462010.sf1'),
+        no = 46, 
+        col_name =c(paste0('H', sprintf('%0.3d', 17),
+                           sprintf('%s%0.3d',
+                                   expand.grid(numbers = 1:21, letters = LETTERS[4:9])$letters,
+                                   expand.grid(numbers = 1:21, letters = LETTERS[4:9])$numbers
+                           )))
+      )
+    ) %>%
+    rbind(
+      tibble(
+        file = paste0(state_code, '000472010.sf1'),
+        no = 47, 
+        col_name =c(paste0('HCT', sprintf('%0.3d', 1), sprintf('%0.4d', 1:35)),
+                    paste0('HCT', sprintf('%0.3d', 2), sprintf('%0.4d', 1:13)),
+                    paste0('HCT', sprintf('%0.3d', 3), sprintf('%0.4d', 1:13)),
+                    paste0('HCT', sprintf('%0.3d', 4), sprintf('%0.4d', 1:13)),
+                    paste0('PCT', sprintf('%0.3d', 23), sprintf('%0.4d', 1:24)),
+                    paste0('PCT', sprintf('%0.3d', 24), sprintf('%0.4d', 1:23)))
+      )
+    ) %>% 
+    mutate(table_no = str_extract(col_name, '^[A-Z]+\\d{3}[A-Z]?'), .after = no)
+  
+  return(field_list)
+}
 
 # Function to generate tables ---------------------------------------------
 
