@@ -138,9 +138,6 @@ loadHeader2010 <- function(path){
   return(header)
 }
 
-# Load variables for the 2010 summary file --------------------------------
-
-
 # Function to generate field names ----------------------------------------
 
 # load the field list into a dataframe based on the data dictionary
