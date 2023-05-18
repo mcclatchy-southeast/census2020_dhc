@@ -439,105 +439,105 @@ genFieldList <- function(state_code = 'nc'){
       tibble(
         file = paste0(state_code, '000202010.sf1'),
         no = 20, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'A', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'A', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000212010.sf1'),
         no = 21, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'B', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'B', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000222010.sf1'),
         no = 22, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'C', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'C', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000232010.sf1'),
         no = 23, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'D', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'D', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000242010.sf1'),
         no = 24, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'E', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'E', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000252010.sf1'),
         no = 25, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'F', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'F', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000262010.sf1'),
         no = 26, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'G', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'G', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000272010.sf1'),
         no = 27, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'H', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'H', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000282010.sf1'),
         no = 28, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'I', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'I', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000292010.sf1'),
         no = 29, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'J', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'J', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000302010.sf1'),
         no = 30, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'K', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'K', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000312010.sf1'),
         no = 31, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'L', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'L', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000322010.sf1'),
         no = 32, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'M', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'M', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000332010.sf1'),
         no = 33, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'N', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'N', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
       tibble(
         file = paste0(state_code, '000342010.sf1'),
         no = 34, 
-        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'O', sprintf('%0.3d', 1:209)))
+        col_name =c(paste0('PCT', sprintf('%0.3d', 12), 'O', sprintf('%0.4d', 1:209)))
       )
     ) %>%
     rbind(
@@ -545,7 +545,7 @@ genFieldList <- function(state_code = 'nc'){
         file = paste0(state_code, '000352010.sf1'),
         no = 35, 
         col_name =c(paste0('PCT', sprintf('%0.3d', 13),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:49, letters = LETTERS[1:5])$letters,
                                    expand.grid(numbers = 1:49, letters = LETTERS[1:5])$numbers
                            )))
@@ -556,17 +556,17 @@ genFieldList <- function(state_code = 'nc'){
         file = paste0(state_code, '000362010.sf1'),
         no = 36, 
         col_name =c(paste0('PCT', sprintf('%0.3d', 13),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:49, letters = LETTERS[6:9])$letters,
                                    expand.grid(numbers = 1:49, letters = LETTERS[6:9])$numbers
                            )),
                     paste0('PCT', sprintf('%0.3d', 14),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
                                    expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
                            )),
                     paste0('PCT', sprintf('%0.3d', 19),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:11, letters = LETTERS[1:2])$letters,
                                    expand.grid(numbers = 1:11, letters = LETTERS[1:2])$numbers
                            )))
@@ -577,12 +577,12 @@ genFieldList <- function(state_code = 'nc'){
         file = paste0(state_code, '000372010.sf1'),
         no = 37, 
         col_name =c(paste0('PCT', sprintf('%0.3d', 19),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:11, letters = LETTERS[3:9])$letters,
                                    expand.grid(numbers = 1:11, letters = LETTERS[3:9])$numbers
                            )),
                     paste0('PCT', sprintf('%0.3d', 20),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:32, letters = LETTERS[1:5])$letters,
                                    expand.grid(numbers = 1:32, letters = LETTERS[1:5])$numbers
                            )))
@@ -593,12 +593,12 @@ genFieldList <- function(state_code = 'nc'){
         file = paste0(state_code, '000382010.sf1'),
         no = 38, 
         col_name =c(paste0('PCT', sprintf('%0.3d', 20),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:32, letters = LETTERS[6:9])$letters,
                                    expand.grid(numbers = 1:32, letters = LETTERS[6:9])$numbers
                            )),
                     paste0('PCT', sprintf('%0.3d', 22),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:21, letters = LETTERS[1:6])$letters,
                                    expand.grid(numbers = 1:21, letters = LETTERS[1:6])$numbers
                            )))
@@ -609,7 +609,7 @@ genFieldList <- function(state_code = 'nc'){
         file = paste0(state_code, '000392010.sf1'),
         no = 39, 
         col_name =c(paste0('PCT', sprintf('%0.3d', 22),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:21, letters = LETTERS[7:9])$letters,
                                    expand.grid(numbers = 1:21, letters = LETTERS[7:9])$numbers
                            )))
@@ -676,7 +676,7 @@ genFieldList <- function(state_code = 'nc'){
                     paste0('H', sprintf('%0.3d', 21), sprintf('%0.4d', 1:3)),
                     paste0('H', sprintf('%0.3d', 22), sprintf('%0.4d', 1:3)),
                     paste0('H', sprintf('%0.3d', 11),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:4, letters = LETTERS[1:6])$letters,
                                    expand.grid(numbers = 1:4, letters = LETTERS[1:6])$numbers
                            )
@@ -689,22 +689,22 @@ genFieldList <- function(state_code = 'nc'){
         file = paste0(state_code, '000452010.sf1'),
         no = 45, 
         col_name =c(paste0('H', sprintf('%0.3d', 11),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:4, letters = LETTERS[7:9])$letters,
                                    expand.grid(numbers = 1:4, letters = LETTERS[7:9])$numbers
                            )),
                     paste0('H', sprintf('%0.3d', 12),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:3, letters = LETTERS[1:9])$letters,
                                    expand.grid(numbers = 1:3, letters = LETTERS[1:9])$numbers
                            )),
                     paste0('H', sprintf('%0.3d', 16),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:17, letters = LETTERS[1:9])$letters,
                                    expand.grid(numbers = 1:17, letters = LETTERS[1:9])$numbers
                            )),
                     paste0('H', sprintf('%0.3d', 17),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:21, letters = LETTERS[1:3])$letters,
                                    expand.grid(numbers = 1:21, letters = LETTERS[1:3])$numbers
                            )))
@@ -715,7 +715,7 @@ genFieldList <- function(state_code = 'nc'){
         file = paste0(state_code, '000462010.sf1'),
         no = 46, 
         col_name =c(paste0('H', sprintf('%0.3d', 17),
-                           sprintf('%s%0.3d',
+                           sprintf('%s%0.4d',
                                    expand.grid(numbers = 1:21, letters = LETTERS[4:9])$letters,
                                    expand.grid(numbers = 1:21, letters = LETTERS[4:9])$numbers
                            )))

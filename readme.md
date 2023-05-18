@@ -131,7 +131,45 @@ The Census uses [geographic identifiers](https://www.census.gov/programs-surveys
 
 ## Data files
 
-*Coming soon.*
+### 2010 data
+
+#### By county
+
+**Median age (P13)** *COMING SOON*
+
+**Sex by age (PCT12)** *COMING SOON*
+
+**Tenure of occupied housing units (H4)** *COMING SOON*
+
+**Status of vacant housing units (H5)** *COMING SOON*
+
+**Population in occupied housing units (H11)** *COMING SOON*
+
+**Population in occupied housing units - white, non-Hispanic (H11I)**  *COMING SOON*
+
+**Population in occupied housing units - Black (H11B)**  *COMING SOON*
+
+**Population in occupied housing units - Hispanic (H11H)**  *COMING SOON*
+
+**
+
+#### By place
+
+**Median age (P13)** *COMING SOON*
+
+**Sex by age (PCT12)** *COMING SOON*
+
+**Tenure of occupied housing units (H4)** *COMING SOON*
+
+**Status of vacant housing units (H5)** *COMING SOON*
+
+**Population in occupied housing units (H11)** *COMING SOON*
+
+**Population in occupied housing units - white, non-Hispanic (H11I)**  *COMING SOON*
+
+**Population in occupied housing units - Black (H11B)**  *COMING SOON*
+
+**Population in occupied housing units - Hispanic (H11H)**  *COMING SOON*
 
 ## Other helpful links
 
