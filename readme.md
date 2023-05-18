@@ -71,7 +71,7 @@ myTable <- genTable('{{PATH}}/nc2010.sf1/', geo_header_nc2010, 'P3', level = '05
 
 ## Data files
 
-Right-click on the files and click "Save as..." to download them.
+Click on the files to view and download them.
 
 ### 2010 data
 
@@ -99,11 +99,13 @@ Right-click on the files and click "Save as..." to download them.
 
 #### By weighted/aggregated 2020 tracts
 
-**COMING SOON**
+*COMING SOON*
 
 #### By weighted/aggregated 2020 blocks
 
-**COMING SOON**
+Census blocks change between each decennial census. To weight the 2010 block values to the new 2020 blocks for comparison, we used [geographic crosswalks from NHGIS](https://www.nhgis.org/geographic-crosswalks). *NOTE: The U.S. Census Bureau advises that due to noise in the block-level values, data should be aggregated to higher levels, like block groups or tracts.*
+
+* [Tenure of occupied housing units (H4)]()
 
 ## Quick reference
 
