@@ -18,7 +18,7 @@ The U.S. Census Bureau has [a zip file [available to download for each state](ht
 
 #### 2. Download our code
 
-Right click and save the script to a location on your hard drive.
+[Right click and save the script](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/code/sf1_loaders.R) to a location on your hard drive.
 
 #### 3. Run the code
 
@@ -51,6 +51,7 @@ For more on the data available, see the [table reference](https://www2.census.go
  - **140** tract    
  - **150** block group
  - **101** block
+
 **geo_comp** - [geographic component](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=177) available on the state level *DEFAULT: 00*
 
 
