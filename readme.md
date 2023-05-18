@@ -140,7 +140,7 @@ Right-click on the files and click "Save as..." to download them.
 * [Median age (P13)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_county_p13.csv)
 * [Sex by age (PCT12)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_county_pct12.csv)
 * [Tenure of occupied housing units (H4)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_county_h4.csv)
-* Status of vacant housing units (H5) *COMING SOON*
+* [Status of vacant housing units (H5)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_county_h5.csv)
 * [Population in occupied housing units (H11)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_county_h11.csv)
 * [Population in occupied housing units - white, non-Hispanic (H11I)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_county_h11i.csv)
 * [Population in occupied housing units - Black (H11B)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_county_h11b.csv)
@@ -148,10 +148,10 @@ Right-click on the files and click "Save as..." to download them.
 
 #### By place
 
-* [[Median age (P13)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_place_p13.csv)
+* [Median age (P13)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_place_p13.csv)
 * [Sex by age (PCT12)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_place_pct12.csv)
 * [Tenure of occupied housing units (H4)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_place_h4.csv)
-* Status of vacant housing units (H5) *COMING SOON*
+* [Status of vacant housing units (H5)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_place_h5.csv)
 * [Population in occupied housing units (H11)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_placeh11.csv)
 [Population in occupied housing units - white, non-Hispanic (H11I)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_place_h11i.csv)
 * [Population in occupied housing units - Black (H11B)](https://github.com/mcclatchy-southeast/census2020_dhc/raw/main/data/nc_place_h11b.csv)
