@@ -14,7 +14,7 @@ This repository contains a helper script to load the 2010 summary file, the equi
 
 #### 1. Download the data
 
-The U.S. Census Bureau has [a zip file [available to download for each state](https://www2.census.gov/census_2010/04-Summary_File_1/). Download the zip file and unzip it to a location on your hard drive. This may take a few minutes.
+The U.S. Census Bureau has a zip file [available to download for each state](https://www2.census.gov/census_2010/04-Summary_File_1/). Download the zip file and unzip it to a location on your hard drive. This may take a few minutes.
 
 #### 2. Download our code
 
