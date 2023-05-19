@@ -36,7 +36,12 @@ Click on the files to view and download them.
 
 #### By weighted/aggregated 2020 tracts
 
-*COMING SOON*
+* [Tenure of occupied housing units (H4)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_tract_2010_h4.csv)
+* [Status of vacant housing units (H5)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_tract_2010_h5.csv)
+* [Population in occupied housing units (H11)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_tract_2010_h11.csv)
+* [Population in occupied housing units - white, non-Hispanic (H11I)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_tract_2010_h11i.csv)
+* [Population in occupied housing units - Black (H11B)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_tract_2010_h11b.csv)
+* [Population in occupied housing units - Hispanic (H11H)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_tract_2010_h11h.csv)
 
 #### By weighted/aggregated 2020 blocks
 
@@ -45,10 +50,9 @@ Census blocks change between each decennial census. To weight the 2010 block val
 * [Tenure of occupied housing units (H4)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2010_h4.csv)
 * [Status of vacant housing units (H5)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2010_h5.csv)
 * [Population in occupied housing units (H11)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2010_h11.csv)
-* [Population in occupied housing units (H11)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/)
-* [Population in occupied housing units - white, non-Hispanic (H11I)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/)
-* [Population in occupied housing units - Black (H11B)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/)
-* [Population in occupied housing units - Hispanic (H11H)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/)
+* [Population in occupied housing units - white, non-Hispanic (H11I)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2010_h11i.csv)
+* [Population in occupied housing units - Black (H11B)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2010_h11b.csv)
+* [Population in occupied housing units - Hispanic (H11H)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2010_h11h.csv)
 
 ## Running code
 
