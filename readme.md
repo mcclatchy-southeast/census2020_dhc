@@ -1,10 +1,11 @@
 # Preparing for additional Census 2020 releases
 
-On May 25, the U.S. Census Bureau will release the Demographic and Housing Characteristics file, a new dataset from the 2020 Census.
+On **May 25**, the U.S. Census Bureau will release the Demographic and Housing Characteristics file, a new dataset from the 2020 census that provides more detail on survey respondents.
 
-Accept where noted below, the following information is specific to data for North Carolina.
+The data includes household makeup, racial and age information as well as ownership status, often at the Census block level.
 
-For more on on the redistricting file release from 2020, see our [original repository](https://github.com/mcclatchy-southeast/census2020) and [past coverage](https://github.com/mcclatchy-southeast/census2020/tree/main#complete-coverage) from the N&O and Charlotte Observer.
+*Jump to a section*
+[Use our code](https://github.com/mcclatchy-southeast/census2020_dhc#running-code) | [Get data](https://github.com/mcclatchy-southeast/census2020_dhc#data-files) | [Quick reference](https://github.com/mcclatchy-southeast/census2020_dhc#quick-reference) | [Helpful links](https://github.com/mcclatchy-southeast/census2020_dhc#other-helpful-links)
 
 ## Running code
 
@@ -105,7 +106,7 @@ Click on the files to view and download them.
 
 Census blocks change between each decennial census. To weight the 2010 block values to the new 2020 blocks for comparison, we used [geographic crosswalks from NHGIS](https://www.nhgis.org/geographic-crosswalks). *NOTE: The U.S. Census Bureau advises that due to noise in the block-level values, data should be aggregated to higher levels, like block groups or tracts.*
 
-* [Tenure of occupied housing units (H4)]()
+* [Tenure of occupied housing units (H4)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2010_h4.csv)
 
 ## Quick reference
 
@@ -171,4 +172,6 @@ The Census uses [geographic identifiers](https://www.census.gov/programs-surveys
 
 * [DHC press kit](https://www.census.gov/newsroom/press-kits/2023/2020-demographic-profile-and-dhc.html)
 * [Data tables](https://www2.census.gov/programs-surveys/decennial/2020/program-management/data-table-guide-dhc-dp.xlsx)
+* [Past coverage from the N&O and Observer](https://github.com/mcclatchy-southeast/census2020/tree/main#complete-coverage)
+* [Original 2020 Census repo](https://github.com/mcclatchy-southeast/census2020)
 
