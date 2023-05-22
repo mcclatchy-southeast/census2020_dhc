@@ -68,7 +68,7 @@ Census tracts also change between each decennial census. The [weighted block-lev
 
 #### By weighted/aggregated 2020 blocks
 
-* *COMING SOON*
+* [Tenure of occupied housing units (H4)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2000_h4.csv)
 
 #### By weighted/aggregated 2020 tracts
 
@@ -145,6 +145,7 @@ myTable <- genTable('{{PATH}}/nc2010.sf1/', geo_header_nc2010, 'P3', fields = fi
 ## Quick reference
 
 ### NC population change over time
+
 | Year | Population | % change
 |:---|---:|---:|
 | 1990 | 6,628,637 | -- |
@@ -157,7 +158,7 @@ Resident population according to Census apportionment results from [2020](https:
 ### NC housing unit change over time
 
 | Year | Total units | Owned units | Homeownership rate
-|:---|---:|---:|
+|:---|---:|---:|---:|
 | 2000 | 3,132,013 | 2,172,355 | 69.4 |
 | 2010 | 3,745,155 | 2,497,900 | 66.7 |
 
