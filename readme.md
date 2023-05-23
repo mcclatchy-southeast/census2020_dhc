@@ -68,11 +68,11 @@ Census tracts also change between each decennial census. The [weighted block-lev
 
 #### By weighted/aggregated 2020 blocks
 
-* *COMING SOON*
+* [Tenure of occupied housing units (H4)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2000_h4.csv)
 
 #### By weighted/aggregated 2020 tracts
 
-* *COMING SOON*
+* [Tenure of occupied housing units (H4)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_tract_2000_h4.csv)
 
 ## Running code
 
