@@ -56,7 +56,7 @@ Census tracts also change between each decennial census. The [weighted block-lev
 * [Population in occupied housing units - Black (H11B)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_tract_2010_h11b.csv)
 * [Population in occupied housing units - Hispanic (H11H)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_tract_2010_h11h.csv)
 
-### 2020 data
+### 2000 data
 
 #### By county
 
@@ -68,7 +68,7 @@ Census tracts also change between each decennial census. The [weighted block-lev
 
 #### By weighted/aggregated 2020 blocks
 
-* [Tenure of occupied housing units (H4)](https://github.com/mcclatchy-southeast/census2020_dhc/blob/main/data/nc_block_2000_h4.csv)
+* *COMING SOON*
 
 #### By weighted/aggregated 2020 tracts
 
