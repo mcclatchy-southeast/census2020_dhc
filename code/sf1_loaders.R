@@ -764,7 +764,7 @@ genFieldList2010 <- function(state_code = 'nc'){
                     paste0('H', sprintf('%0.3d', 13), sprintf('%0.4d', 1:8)),
                     paste0('H', sprintf('%0.3d', 14), sprintf('%0.4d', 1:17)),
                     paste0('H', sprintf('%0.3d', 15), sprintf('%0.4d', 1:7)),
-                    paste0('H', sprintf('%0.3d', 16), sprintf('%0.4d', 1:16)),
+                    paste0('H', sprintf('%0.3d', 16), sprintf('%0.4d', 1:17)),
                     paste0('H', sprintf('%0.3d', 17), sprintf('%0.4d', 1:21)),
                     paste0('H', sprintf('%0.3d', 18), sprintf('%0.4d', 1:69)),
                     paste0('H', sprintf('%0.3d', 19), sprintf('%0.4d', 1:7)),
