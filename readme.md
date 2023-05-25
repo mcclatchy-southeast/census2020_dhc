@@ -146,7 +146,7 @@ For more on the data available, see the [table reference](https://www2.census.go
     - **160** place   
     - **140** tract    
     - **150** block group
-    - **101** block
+    - **101/100** block
  - **geo_comp** [geographic component](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=177) available on the state level *DEFAULT: 00*
 
 ```R

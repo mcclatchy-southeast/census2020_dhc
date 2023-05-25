@@ -1458,11 +1458,22 @@ genTable <- function(dir, geoheader, table_id, fields, level = '040', geo_comp =
     pull(file) %>% 
     pluck(1)
   
+  #construct the file path
+  file_path <- paste0(dir, load_file)
+  
   #make sure its right
   cat('--- LOADING TABLE', table_id, 'FROM FILE', load_file,'\n')
   
+  #check for a pipe delimited file
+  delimiter <- ','
+  first_line <- read_lines(file_path, n_max = 1)
+  if(first_line%>% str_detect('\\|')){
+    cat('--- DETECTING PIPE-DELIMTED TABLE\n')
+    delimiter <- '|'
+  }
+  
   #load the table and filter
-  table <- read_csv(paste0(dir, load_file),
+  table <- read_delim(file_path, delim = delimiter,
            col_types = cols(.default = "d",
                             fileid = 'c', stusab = 'c', chariter = 'c' , cifsn = 'c', logrecno = 'c'),
            col_names = all_cols) %>% 
