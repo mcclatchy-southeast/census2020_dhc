@@ -1493,7 +1493,7 @@ genTable <- function(dir, geoheader, table_id, fields, level = '040', geo_comp =
       sumlev == '101' ~ paste0(state, county, tract, block), #block
       .default = NA
     )) %>% 
-    select(logrecno, geocomp, geocode)
+    select(logrecno, geocomp, geocode, name)
   
   cat('--- FILTERED HEADER FOR', level_desc, '\n')
   
