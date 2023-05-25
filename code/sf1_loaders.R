@@ -18,6 +18,29 @@ library(tidyverse)
 
 # Create a function for loading SF file -----------------------------------
 
+#geoheader file for 2020
+#
+#usage
+# geo_header_nc2020 <- #load_header('data/nc2020.dhc/ncgeo2020.dhc')
+loadHeader2020 <- function(path, state_code){
+  
+  header <- read_delim( path, col_types = cols(.default = "c"),
+    col_names = c("fileid", "stusab", "sumlev", "geovar", "geocomp", "chariter", "cifsn", "logrecno", "geoid", 
+                  "geocode", "region", "division", "state", "statens", "county", "countycc", "countyns", "cousub",
+                  "cousubcc", "cousubns", "submcd", "submcdcc", "submcdns", "estate", "estatecc", "estatens", 
+                  "concit", "concitcc", "concitns", "place", "placecc", "placens", "tract", "blkgrp", "block", 
+                  "aianhh", "aihhtli", "aianhhfp", "aianhhcc", "aianhhns", "aits", "aitsfp", "aitscc", "aitsns",
+                  "ttract", "tblkgrp", "anrc", "anrccc", "anrcns", "cbsa", "memi", "csa", "metdiv", "necta",
+                  "nmemi", "cnecta", "nectadiv", "cbsapci", "nectapci", "ua", "uatype", "ur", "cd116", "cd118",
+                  "cd119", "cd120", "cd121", "sldu18", "sldu22", "sldu24", "sldu26", "sldu28", "sldl18", "sldl22",
+                  "sldl24", "sldl26", "sldl28", "vtd", "vtdi", "zcta", "sdelm", "sdsec", "sduni", "puma", "arealand",
+                  "areawatr", "basename", "name", "funcstat", "gcuni", "pop100", "hu100", "intptlat", "intptlon", 
+                  "lsadc", "partflag", "uga"),
+    delim = '|')
+  return(header)
+          
+}
+
 # One of multiple Census files that describe the demographics gathered and calculated for the 2010 Census. 
 # This file contains the State/County/Tract/Block IDs link to the logical record number, which can then be 
 # linked to the other two tables. Relationships are one-to-one.
@@ -239,6 +262,16 @@ loadHeader2000 <- function(path){
 }
 
 # Function to generate field names ----------------------------------------
+#2020 field list exists in a table matrix here:
+#https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/demographic-and-housing-characteristics-file-and-demographic-profile/2020-dhc-table-matrix.xlsx
+genFieldList2020 <- function(state_code = 'nc'){
+  field_list <- tibble(
+    file = 'base',
+    no = 0,
+    col_name = c('fileid', 'stusab', 'chariter', 'cifsn', 'logrecno')
+  )
+  
+}
 
 # load the field list into a dataframe based on the data dictionary
 # https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=183

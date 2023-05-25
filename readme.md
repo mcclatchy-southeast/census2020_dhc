@@ -82,7 +82,13 @@ This repository contains a helper script to load the 2010 summary file, the equi
 
 #### 1. Download the data
 
-The U.S. Census Bureau has a zip file [available to download for each state](https://www2.census.gov/census_2010/04-Summary_File_1/). Download the zip file and unzip it to a location on your hard drive. This may take a few minutes.
+The U.S. Census Bureau has a zip file [available to download for each state and year. 
+
+* [2000](https://www2.census.gov/census_2000/datasets/Summary_File_1/)
+* [2010](https://www2.census.gov/census_2010/04-Summary_File_1/)
+* [2020](https://www2.census.gov/programs-surveys/decennial/2020/data/demographic-and-housing-characteristics-file/)
+
+Download the zip file and unzip it to a location on your hard drive. This may take a few minutes.
 
 #### 2. Download our code
 
@@ -100,6 +106,9 @@ source('{{PATH}}/sf1_loaders.R')
 The summary file is split into a header file and dozens of other tables. These scripts will help you join them up. Load the header file first, replacing `{{PATH}}` with the directory where you stored the unzipped file. *NOTE: the code that follows assumes you did NOT change the names of any of the unzipped files. If you run into errors, double-check your filenames and directories.*
 
 ```R
+#load the 2020 header file
+geo_header_nc2020 <- loadHeader2020( '{{PATH}}/nc2020.dhc/ncgeo2020.dhc')
+
 #load the 2010 header file
 geo_header_nc2010 <- loadHeader2010( '{{PATH}}/nc2010.sf1/ncgeo2010.sf1')
 
@@ -161,6 +170,7 @@ Resident population according to Census apportionment results from [2020](https:
 |:---|---:|---:|---:|
 | 2000 | 3,132,013 | 2,172,355 | 69.4 |
 | 2010 | 3,745,155 | 2,497,900 | 66.7 |
+| 2020 | 4,160,856 | 2,701,409 | 64.9 |
 
 ### Geographic area changes over time
 | Geography | 2000 count | 2010 count | 2020 count |
@@ -200,7 +210,7 @@ The Census uses [geographic identifiers](https://www.census.gov/programs-surveys
 |:--|:--|:--|
 | 2000 Summary File 1 | [Files](https://www2.census.gov/census_2000/datasets/Summary_File_1/) | [Data dictionary](https://www2.census.gov/programs-surveys/decennial/2000/technical-documentation/complete-tech-docs/summary-files/sf1.pdf#page=204) |
 | [2010 Summary File 1](https://www2.census.gov/census_2010/04-Summary_File_1/) | fixed-width and comma-delimited txt files | [Data dictionary](https://www2.census.gov/programs-surveys/decennial/2010/technical-documentation/complete-tech-docs/summary-file/sf1.pdf#page=163) |
-| 2020 DHC file| *Coming soon* | [Data dictionary](https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/demographic-and-housing-characteristics-file-and-demographic-profile/2020census-demographic-and-housing-characteristics-file-and-demographic-profile-techdoc.pdf) |
+| [2020 DHC file](https://www2.census.gov/programs-surveys/decennial/2020/data/demographic-and-housing-characteristics-file/) | Pipe delimited txt files  | [Data dictionary](https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/demographic-and-housing-characteristics-file-and-demographic-profile/2020census-demographic-and-housing-characteristics-file-and-demographic-profile-techdoc.pdf) | [Table matrix](https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/demographic-and-housing-characteristics-file-and-demographic-profile/2020-dhc-table-matrix.xlsx) |
 | [2010/2020 block shapefile](https://www.census.gov/cgi-bin/geo/shapefiles/index.php?year=2020&layergroup=Blocks%20%282020%29)| ESRI shapefile | [Notes](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) |
 | [Block assignment files](https://www.census.gov/geographies/reference-files/time-series/geo/block-assignment-files.html)| pipe-delimited txt files | [File record layout](https://www.census.gov/programs-surveys/geography/technical-documentation/records-layout/2020-census-block-record-layout.html) |
 | [2010 Name lookup tables](https://www.census.gov/geographies/reference-files/time-series/geo/name-lookup-tables.2010.html) | pipe-delimited txt files | [File record layout](https://www.census.gov/programs-surveys/geography/technical-documentation/records-layout/nlt-record-layouts.html) |
