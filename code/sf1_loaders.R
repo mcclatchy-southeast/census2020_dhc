@@ -265,11 +265,13 @@ loadHeader2000 <- function(path){
 #2020 field list exists in a table matrix here:
 #https://www2.census.gov/programs-surveys/decennial/2020/technical-documentation/complete-tech-docs/demographic-and-housing-characteristics-file-and-demographic-profile/2020-dhc-table-matrix.xlsx
 genFieldList2020 <- function(state_code = 'nc'){
-  field_list <- tibble(
-    file = 'base',
-    no = 0,
-    col_name = c('fileid', 'stusab', 'chariter', 'cifsn', 'logrecno')
-  )
+  
+  field_list <- read_csv( url(
+    'https://raw.githubusercontent.com/mcclatchy-southeast/census2020_dhc/main/data/table_matrix2020.csv'
+    ), col_types = cols(.default = 'c')) %>% 
+    mutate(file = if_else(file == 'base', file, paste0(state_code, file) ))
+  
+  return(field_list)
   
 }
 
@@ -1417,7 +1419,7 @@ genTable <- function(dir, geoheader, table_id, fields, level = '040', geo_comp =
     level == '160' ~ 'PLACE',
     level == '140' ~ 'TRACT',
     level == '150' ~ 'BLOCK GROUP',
-    level == '101' ~ 'BLOCK',
+    level == '101' | level == '100' ~ 'BLOCK',
     .default = NA
   )
   

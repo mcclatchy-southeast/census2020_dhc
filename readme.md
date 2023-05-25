@@ -121,8 +121,11 @@ Load the field list with the `genFieldList` function, which generates a list of 
 The function optionally accepts a two-digit state code parameter. The default is `nc`.
 
 ```R
+#load the field list for 2020
+field_list2020 <- genFieldList2020()
+
 #load the field list for 2010
-field_list2010 <- genFieldList()
+field_list2010 <- genFieldList2010()
 
 #and for 2000
 field_list2000 <- genFieldList2000('nc')
