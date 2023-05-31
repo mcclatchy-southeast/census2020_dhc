@@ -52,3 +52,45 @@ Mecklenburg County saw the largest drop homeownership rates across the state, di
 |TOTAL     |   2,497,900|    1,247,255|   2,701,409|    1,459,447|       415,701|       203,509|        212,192|          66.7|          64.9|-1.8           |
 
 Despite overall growth in the number of housing units as the state's population boomed in the last decade, there were actually fewer homeowners in some age groups.
+
+## Homeownership for younger homeowners drops in Mecklenburg
+
+|Age group |Owned, 2010 | Rented, 2010| Owned, 2020| Rented, 2020| Change, total| Change, owned| Change, rented| HO rate, 2010|HO rate, 2020 |HO rate change |
+|:---------|:-----------|------------:|-----------:|------------:|-------------:|-------------:|--------------:|-------------:|:-------------|:--------------|
+|15 to 24  |2,453       |       17,637|       1,862|       19,624|         1,396|          -591|          1,987|          12.2|8.7           |-3.5           |
+|25 to 34  |33,515      |       45,750|      29,920|       66,117|        16,772|        -3,595|         20,367|          42.3|31.2          |-11.1          |
+|35 to 44  |52,048      |       30,971|      48,461|       42,599|         8,041|        -3,587|         11,628|          62.7|53.2          |-9.5           |
+|45 to 54  |51,735      |       22,240|      54,642|       31,135|        11,802|         2,907|          8,895|          69.9|63.7          |-6.2           |
+|55 to 59  |21,625      |        7,686|      26,550|       12,167|         9,406|         4,925|          4,481|          73.8|68.6          |-5.2           |
+|60 to 64  |19,176      |        5,623|      23,866|       10,062|         9,129|         4,690|          4,439|          77.3|70.3          |-7.0           |
+|65 to 74  |22,643      |        6,095|      36,885|       13,157|        21,304|        14,242|          7,062|          78.8|73.7          |-5.1           |
+|75 to 84  |12,488      |        3,890|      16,829|        6,280|         6,731|         4,341|          2,390|          76.2|72.8          |-3.4           |
+|85+       |3,905       |        2,733|       5,209|        3,449|         2,020|         1,304|            716|          58.8|60.2          |1.4            |
+|TOTAL     |219,588     |      142,625|     244,224|      204,590|        86,601|        24,636|         61,965|          60.6|54.4          |-6.2           |
+
+The decline in Mecklenburg County homeownership wasn't uniform.
+
+No age group in Mecklenburg county lost more ground than homeowners aged 25 to 34, whose homeownership rate dropped 11 points from 2010 to 2020 to 31%. Despite Mecklenburg's massive population growth, there were about 3,600 fewer homeowners in that age group in 2020 compared to a decade earlier. 
+
+The decline in homeownership in Mecklenburg County's 25-to-34-year-olds was among the worst for any age group in any North Carolina county.
+
+Homeowners aged 35 to 44 weren't far behind.
+
+# And in Wake
+
+|Age group |Owned, 2010 | Rented, 2010| Owned, 2020| Rented, 2020| Change, total| Change, owned| Change, rented| HO rate, 2010|HO rate, 2020 |HO rate change |
+|:---------|:-----------|------------:|-----------:|------------:|-------------:|-------------:|--------------:|-------------:|:-------------|:--------------|
+|15 to 24  |2,097       |       16,497|       1,814|       17,235|           455|          -283|            738|          11.3|9.5           |-1.8           |
+|25 to 34  |31,207      |       37,617|      28,694|       51,362|        11,232|        -2,513|         13,745|          45.3|35.8          |-9.5           |
+|35 to 44  |54,966      |       26,113|      55,631|       34,540|         9,092|           665|          8,427|          67.8|61.7          |-6.1           |
+|45 to 54  |57,350      |       18,374|      63,583|       25,393|        13,252|         6,233|          7,019|          75.7|71.5          |-4.2           |
+|55 to 59  |23,004      |        6,035|      29,861|       10,217|        11,039|         6,857|          4,182|          79.2|74.5          |-4.7           |
+|60 to 64  |19,332      |        4,591|      26,080|        8,362|        10,519|         6,748|          3,771|          80.8|75.7          |-5.1           |
+|65 to 74  |22,725      |        4,948|      40,295|       11,546|        24,168|        17,570|          6,598|          82.1|77.7          |-4.4           |
+|75 to 84  |11,285      |        3,642|      18,111|        5,925|         9,109|         6,826|          2,283|          75.6|75.3          |-0.3           |
+|85+       |3,188       |        2,674|       5,010|        3,384|         2,532|         1,822|            710|          54.4|59.7          |5.3            |
+|TOTAL     |225,154     |      120,491|     269,079|      167,964|        91,398|        43,925|         47,473|          65.1|61.6          |-3.5           |
+
+By comparison, Wake County saw a 9.5 percentage point drop in homeownership for 25- to 34-year-olds
+
+
