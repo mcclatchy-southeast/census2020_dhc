@@ -1420,6 +1420,7 @@ genTable <- function(dir, geoheader, table_id, fields, level = '040', geo_comp =
     level == '140' ~ 'TRACT',
     level == '150' ~ 'BLOCK GROUP',
     level == '101' | level == '100' ~ 'BLOCK',
+    level == '310' ~ 'MSA',
     .default = NA
   )
   
@@ -1490,7 +1491,8 @@ genTable <- function(dir, geoheader, table_id, fields, level = '040', geo_comp =
       sumlev == '160' ~ paste0(state, place), #place
       sumlev == '140' ~ paste0(state, county, tract), #tract
       sumlev == '150' ~ paste0(state, county, tract, blkgrp), #blkgrp
-      sumlev == '101' ~ paste0(state, county, tract, block), #block
+      sumlev == '101' | sumlev == '100' ~ paste0(state, county, tract, block), #block
+      #sumlev == '310' ~ cbsa, #msa (kill temporarily)
       .default = NA
     )) %>% 
     select(logrecno, geocomp, geocode, name)
