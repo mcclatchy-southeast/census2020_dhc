@@ -91,6 +91,94 @@ Homeowners aged 35 to 44 weren't far behind.
 |85+       |3,188       |        2,674|       5,010|        3,384|         2,532|         1,822|            710|          54.4|59.7          |5.3            |
 |TOTAL     |225,154     |      120,491|     269,079|      167,964|        91,398|        43,925|         47,473|          65.1|61.6          |-3.5           |
 
-By comparison, Wake County saw a 9.5 percentage point drop in homeownership for 25- to 34-year-olds
+By comparison, Wake County saw a 9.5 percentage point drop in homeownership for 25- to 34-year-olds.
+
+## Black homeownership falling faster
+
+|Race/ethnicity     | Owned, 2010| Rented, 2010| Owned, 2020| Rented, 2020| HO rate, 2010| HO rate, 2020| HO rate change|
+|:------------------|-----------:|------------:|-----------:|------------:|-------------:|-------------:|--------------:|
+|Non-Hispanic white |   1,948,182|      676,293|   2,000,895|      730,014|          74.2|          73.3|           -0.9|
+|Non-Hispanic Black |     377,932|      396,510|     385,841|      448,662|          48.8|          46.2|           -2.6|
+|Hispanic           |      86,383|      115,045|     145,382|      161,806|          42.9|          47.3|            4.4|
+|TOTAL              |   2,497,900|    1,247,255|   2,701,409|    1,459,447|          66.7|          64.9|           -1.8|
+
+Statwide, homeownership by non-Hispanic Black residents fell by 2.6 percentage points, almost three times the decrease of white residents.
+
+Less than half of the state's Black households own their own home.
+
+Hispanic homeownership, meanwhile, increased more than 4 percentage points.
+
+## ACS points to uptick in NC homeownership rate
+
+|Year | HO rate| Margin of error| 1-year change| 1-year Signficant?| 3-year change| 3-year signficant?| 5-year change| 5-year Signficant?|
+|:----|-------:|---------------:|-------------:|------------------:|-------------:|------------------:|-------------:|------------------:|
+|2009 |    68.1|             0.2|            NA|                 NA|            NA|                 NA|            NA|                 NA|
+|2010 |    68.1|             0.2|           0.0|              FALSE|            NA|                 NA|            NA|                 NA|
+|2011 |    67.8|             0.2|          -0.3|               TRUE|            NA|                 NA|            NA|                 NA|
+|2012 |    67.1|             0.2|          -0.7|               TRUE|          -1.0|               TRUE|            NA|                 NA|
+|2013 |    66.4|             0.2|          -0.7|               TRUE|          -1.7|               TRUE|            NA|                 NA|
+|2014 |    65.8|             0.2|          -0.6|               TRUE|          -2.0|               TRUE|          -2.3|               TRUE|
+|2015 |    65.1|             0.2|          -0.7|               TRUE|          -2.0|               TRUE|          -3.0|               TRUE|
+|2016 |    64.8|             0.3|          -0.3|              FALSE|          -1.6|               TRUE|          -3.0|               TRUE|
+|2017 |    65.0|             0.2|           0.2|              FALSE|          -0.8|               TRUE|          -2.1|               TRUE|
+|2018 |    65.0|             0.3|           0.0|              FALSE|          -0.1|              FALSE|          -1.4|               TRUE|
+|2019 |    65.2|             0.3|           0.2|              FALSE|           0.4|              FALSE|          -0.6|               TRUE|
+|2020 |    65.7|             0.2|           0.5|               TRUE|           0.7|               TRUE|           0.6|               TRUE|
+|2021 |    65.9|             0.2|           0.2|              FALSE|           0.9|               TRUE|           1.1|               TRUE|
+
+While not as precise as the decennial census, the 5-year American Community Survey provides some insight into how homeownership has changed between the decades. In this case, it shows that homeownership has increased slightly statewide after hitting a low point in the 2012-2016 data.
+
+Not all of these changes are statistically signficant, but from the 2012-2016 period to the 2017-2021 period, the homeownership rate increased by an estimated 1.1 percentage points statewide.
+
+## Picture murkier for counties like Mecklenburg
+
+|County      | Year| HO rate| Margin of error| 1-year change| 1-year Signficant?| 3-year change| 3-year signficant?| 5-year change|5-year Signficant? |
+|:-----------|----:|-------:|---------------:|-------------:|------------------:|-------------:|------------------:|-------------:|:------------------|
+|MECKLENBURG | 2009|    63.0|             0.5|            NA|                 NA|            NA|                 NA|            NA|NA                 |
+|MECKLENBURG | 2010|    62.6|             0.5|          -0.4|              FALSE|            NA|                 NA|            NA|NA                 |
+|MECKLENBURG | 2011|    61.8|             0.5|          -0.8|               TRUE|            NA|                 NA|            NA|NA                 |
+|MECKLENBURG | 2012|    60.8|             0.5|          -1.0|               TRUE|          -2.2|               TRUE|            NA|NA                 |
+|MECKLENBURG | 2013|    59.5|             0.5|          -1.3|               TRUE|          -3.1|               TRUE|            NA|NA                 |
+|MECKLENBURG | 2014|    58.7|             0.5|          -0.8|               TRUE|          -3.1|               TRUE|          -4.3|TRUE               |
+|MECKLENBURG | 2015|    57.5|             0.5|          -1.2|               TRUE|          -3.3|               TRUE|          -5.1|TRUE               |
+|MECKLENBURG | 2016|    56.9|             0.5|          -0.6|              FALSE|          -2.6|               TRUE|          -4.9|TRUE               |
+|MECKLENBURG | 2017|    56.7|             0.5|          -0.2|              FALSE|          -2.0|               TRUE|          -4.1|TRUE               |
+|MECKLENBURG | 2018|    56.5|             0.5|          -0.2|              FALSE|          -1.0|               TRUE|          -3.0|TRUE               |
+|MECKLENBURG | 2019|    56.4|             0.5|          -0.1|              FALSE|          -0.5|              FALSE|          -2.3|TRUE               |
+|MECKLENBURG | 2020|    56.4|             0.7|           0.0|              FALSE|          -0.3|              FALSE|          -1.1|TRUE               |
+|MECKLENBURG | 2021|    56.4|             0.5|           0.0|              FALSE|          -0.1|              FALSE|          -0.5|FALSE              |       
+
+On the county-level though, Mecklenburg County has seen either a slight decline – or no change since 2016.
+
+## Same for 1-year ACS data in Mecklenburg
+
+|County      |Year | HO rate| Margin of error| 1-year change| 1-year Signficant?| 3-year change| 3-year signficant?| 5-year change| 5-year Signficant?|
+|:-----------|:----|-------:|---------------:|-------------:|------------------:|-------------:|------------------:|-------------:|------------------:|
+|MECKLENBURG |2007 |    63.4|             1.3|            NA|                 NA|            NA|                 NA|            NA|                 NA|
+|MECKLENBURG |2008 |    63.6|             1.2|           0.2|              FALSE|            NA|                 NA|            NA|                 NA|
+|MECKLENBURG |2009 |    61.1|             1.3|          -2.5|               TRUE|            NA|                 NA|            NA|                 NA|
+|MECKLENBURG |2010 |    61.4|             1.3|           0.3|              FALSE|          -2.0|               TRUE|            NA|                 NA|
+|MECKLENBURG |2011 |    59.7|             1.6|          -1.7|              FALSE|          -3.9|               TRUE|            NA|                 NA|
+|MECKLENBURG |2012 |    58.1|             1.1|          -1.6|              FALSE|          -3.0|               TRUE|          -5.3|               TRUE|
+|MECKLENBURG |2013 |    56.8|             1.1|          -1.3|              FALSE|          -4.6|               TRUE|          -6.8|               TRUE|
+|MECKLENBURG |2014 |    56.6|             1.0|          -0.2|              FALSE|          -3.1|               TRUE|          -4.5|               TRUE|
+|MECKLENBURG |2015 |    55.7|             0.8|          -0.9|              FALSE|          -2.4|               TRUE|          -5.7|               TRUE|
+|MECKLENBURG |2016 |    55.8|             1.0|           0.1|              FALSE|          -1.0|              FALSE|          -3.9|               TRUE|
+|MECKLENBURG |2017 |    56.6|             1.0|           0.8|              FALSE|           0.0|              FALSE|          -1.5|               TRUE|
+|MECKLENBURG |2018 |    55.9|             1.2|          -0.7|              FALSE|           0.2|              FALSE|          -0.9|              FALSE|
+|MECKLENBURG |2019 |    56.0|             1.1|           0.1|              FALSE|           0.2|              FALSE|          -0.6|              FALSE|
+|MECKLENBURG |2020 |      NA|              NA|            NA|                 NA|            NA|                 NA|            NA|                 NA|
+|MECKLENBURG |2021 |    56.5|             1.1|            NA|                 NA|           0.6|              FALSE|           0.7|              FALSE|
+
+It's a similar picture if we look at the changes in Mecklenburg for the 1-year ACS data (which wasn't available for 2020 due to problems during the pandemic). Although the estimate for 2021 does appear higher than the rate in 2016, it's not statistically signficant.
 
 
+## Methodology notes
+
+The first five-year American Community Survey estimates [covered the years from 2005 to 2009](https://www.census.gov/history/www/programs/demographic/american_community_survey.html).
+
+ACS data is collected over the 5-year period vs. a point in time. Here's some guidance [from the U.S. Census Bureau](https://www.census.gov/content/dam/Census/library/publications/2018/acs/acs_general_handbook_2018_ch03.pdf):
+
+> Multiyear estimates should be labeled to indicate clearly the full period of time (e.g., “The child poverty rate in 2011–2015 was X percent.”). They do not describe any specific day, month, or year within that time period.
+>
+> Multiyear estimates require some considerations that single-year estimates do not. For example, multiyear estimates released in consecutive years consist mostly of overlapping years and shared data.
